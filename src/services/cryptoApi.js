@@ -1,37 +1,21 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
-
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query';
 const cryptoApiHeaders = {
-    'X-RapidAPI-Key': '64dcb3057amshcded2e08d678728p13b249jsnaa84abe7ff61',
-    'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
-}
+    'x-rapidapi-host': 'bing-news-search1.p.rapidapi.com',
+    'x-rapidapi-key': 'f0021db587msh781fb1cbef39856p11c183jsn45521d5d1c85',
+  };
 
-const baseUrl = 'https://coinranking1.p.rapidapi.com/coins';
+const baseUrl = 'https://coinranking1.p.rapidapi.com';
 
 const createRequest = (url) => ({ url, headers: cryptoApiHeaders})
 
 export const cryptoApi = createApi({
     reducerPath: 'cryptoApi',
     baseQuery: fetchBaseQuery({ baseUrl }),
-    endpoints: (builder ) => ({
+    endpoints: (builder) => ({
         getCryptos: builder.query({
-            query: () => createRequest('/exchanges')
+            query: () => createRequest('/coins')
         })
     })
 });
-// const options = {
-//     method: 'GET',
-//     url: 'https://coinranking1.p.rapidapi.com/coins',
-//     params: {
-//       referenceCurrencyUuid: 'yhjMzLPhuIDl',
-//       timePeriod: '24h',
-//       'tiers[0]': '1',
-//       orderBy: 'marketCap',
-//       orderDirection: 'desc',
-//       limit: '50',
-//       offset: '0'
-//     },
-//     headers: {
-//       'X-RapidAPI-Key': '64dcb3057amshcded2e08d678728p13b249jsnaa84abe7ff61',
-//       'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
-//     }
-//   };
+
+export { cryptoApi as useGetCryptoQuery };
